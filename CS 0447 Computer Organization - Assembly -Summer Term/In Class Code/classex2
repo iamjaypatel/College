@@ -1,0 +1,76 @@
+.text
+	addi $a0, $zero, 4
+	addi $a1, $zero, 3
+	jal _exp
+	add $s0, $zero, $v0
+	addi $v0, $zero, 10
+	syscall
+#_multi
+#
+#Arguments
+#	$a0: multiplicant
+#	$a1: multiplier
+#	REturn v0 = multiplicant * multiplier	
+#
+_multi: 
+	add $t0, $zero, $a0 # $to is the multiplicant
+	add $t1, $zero, $a1 #$t1 is the multiplier
+	add $t2, $zero, $zero #t2 is a temp result 
+	add $t3, $zero, $zero
+_multi_loop:	
+	beq $t3, $t1, _multi_done
+	add $t2, $t2, $t0 # result = result + multiplicand
+	addi $t3, $t3, 1 #counter++
+	j	_multi_loop
+
+_multi_done: 
+	add $v0, $zero, $t2	#set $v0 to the result
+	jr $ra
+	
+	
+_exp:
+	add $s0, $zero, $a0	#$s0 is x
+	add $s1, $zero, $a1	#s1 is y
+	addi $s2, $zero, 1	#s2 is the temp result
+	add $s3, $zero, $zero #counter 
+_exp_loop:
+	beq $s3, $s1, _exp_done
+	add $a0, $zero, $s2 # set result as a multiplicant
+	add $a1, $zero, $s0 #set x as a multiplier
+	add $s7, $zero, $ra
+	jal _multi2
+	add $ra, $zero, $s7
+	add $s2, $zero, $v0 #result = result * x 
+	addi $s3, $s3, 1
+	j _exp_loop
+_exp_done:
+	add $v1, $zero, $s2
+	jr $ra
+	
+_multi2: 
+	addi $sp, $sp, -16 #moves stack pointer, allocating space in the activation frame
+	sw $s0, 0($sp)   #stores temp registers in the activation frame 
+	sw $s1, 4($sp)
+	sw $s2, 8($sp)
+	sw $s3, 12($sp)
+	add $s0, $zero, $a0 # $to is the multiplicant
+	add $s1, $zero, $a1 #$t1 is the multiplier
+	add $s2, $zero, $zero #t2 is a temp result 
+	add $s3, $zero, $zero
+_multi_loop2:	
+	beq $s3, $s1, _multi_done2
+	add $s2, $s2, $t0 # result = result + multiplicand
+	addi $s3, $s3, 1 #counter++
+	j	_multi_loop2
+
+_multi_done2: 
+	add $v0, $zero, $s2	#set $v0 to the result
+	lw $s0, 0($sp) #restores values of potentially destroyed registers
+	lw $s1, 4($sp)
+	lw $s2, 8($sp)
+	lw $s3, 12($sp)
+	addi $sp, $sp, 16 #closes activation frame, puts stack pointer back to origin
+	jr $ra
+	
+	
+	
