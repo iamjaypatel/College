@@ -1,0 +1,64 @@
+CS 0447- EXAM
+
+Number System:
+	Decimal > Binary
+	Binary > Decimal
+	Represent Neg value in decimal
+	Sign-magnitude One's/ 2's Complement
+	
+	MSB is sign, rest is magnitude
+					Sign-m		1's comp	2's comp
+22					00010110	00010110	00010110
+-33(00100001)		10100001	11011110	11011111
+					11010101	-85		
+								11010101(flip it bit by bit)	-42
+											11010101(flip it bit by bit and add 1) -43
+Dec		Hex
+0-9		0-9
+10		A
+11		B
+12		C
+13		D
+14		E	
+15		F
+
+Binary to Hex, convert
+----------------------------------------------
+MIPS Assembly:
+
+Convert Instruction to :
+1. slt	$t0, $s0, $a0		- If $s0 < $a0, $t0 = 1, else $t0 = 0
+	
+Ans:  Operation:	R[rd] = (R[rs]<R[rt])?1:0
+	slt	$t0, $s0, $a0
+		rd	 rs	  rt
+		
+		op		rs		rt		rd		shamt	func
+		6		5		5		5		5		5
+		000000	10000   00100  01000	00000	101010
+	
+2. lw	$s5, -8($v0)
+Ans: I-Type
+	
+	op		rs		rt		imm
+	6		5		5		16
+	100011  00010   10101   1111 1111 1111 0111
+	
+op: 23hex   00100011
+
+R[rt] = M[R[rs]+ SignExtension]
+
+lw	$s5, -8($v0)
+	rt	 imm  rs
+	
+3. sll	$t0, $t1, 5
+Ans: 
+
+
+---------------------
+
+destination PC = currentPC + 4 + (signExt(imm) <<2)
+				
+				
+	Calculating j	xxxxx
+	just take destination/4.
