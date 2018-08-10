@@ -1,0 +1,4 @@
+This is a four line
+file that you can compress
+using Huffmman encoding.
+Good Luck!
