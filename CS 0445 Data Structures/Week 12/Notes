@@ -1,0 +1,22 @@
+Searching and Iterators:
+
+Unsorted Array
+	Linear Search: check every value until the target is reached
+	
+	Given a chain of nodes, only allowed to make one pass, with that how would you
+		return the middle node of the chain?
+	Answer: have 2 pointers, 1 moves, and other moves every other
+	
+Iterator:
+	To remove using iterator, we have to call next() every time.
+	
+	Josh   ^   Jon       Jay         
+(^) is iterator, it always points in between items before first item and after last item.
+
+- Iterator is separate from ADT, and we have to implement it separately.
+
+iterable:
+
+
+Tree ADT:
+	
