@@ -1,0 +1,27 @@
+Project 1 CS 0447 Summer 
+
+Calculator
+
+1. set t8, to display on screen
+2. t9, is keypad, only work is t9 is 0.
+3. set t9, to zero,
+	keep, looping, aslong as t9 is zero,
+	once its non zero, take value and do something,
+	after doing that, set t9 to zero, go back to t9
+	
+addi	$t9, $zero, $zero
+wait:	
+		beq	$t9, zero, wait
+		
+		
+		andi	$t8, $t9, 15
+		
+		add	$t9, $zero, $zero
+		j	wait
+		
+		
+mult by 10
+
+	sll s1, s0, 3			// s1 = s0 * 8
+	add	s1, s1, s0			// s1 = s0 * 9
+	add	s0, s1, s0			// s0 = s1 * 10
