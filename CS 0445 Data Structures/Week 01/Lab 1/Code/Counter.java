@@ -2,10 +2,11 @@
 /**
  * The counter class implements a counter that will roll over to the initial
  * value when it hits the maximum value.
- * 
- * @author Charles Hoot 
+ *
+ * @author Charles Hoot
  * @version 4.0
  */
+ //Add Comment to test Github
 public class Counter
 {
     // PUT PRIVATE DATA FIELDS HERE
@@ -18,8 +19,8 @@ public class Counter
     {
         // ADD CODE FOR THE CONSTRUCTOR
     }
-    
-    
+
+
     /**
      * The alternate constructor for objects of class Counter.  The minimum and maximum values are given as parameters.
      * The counter starts at the minimum value.
@@ -30,7 +31,7 @@ public class Counter
     {
         // ADD CODE FOR THE ALTERNATE CONSTRUCTOR
     }
-    
+
     /**
      * Determine if two counters are in the same state
      *
@@ -46,8 +47,8 @@ public class Counter
         }
         return result;
     }
-    
-    
+
+
 
     /**
      * Increases the counter by one
@@ -56,8 +57,8 @@ public class Counter
     {
         // ADD CODE TO INCREASE THE VALUE OF THE COUNTER
     }
- 
- 
+
+
      /**
      * Decreases the counter by one
      */
@@ -65,7 +66,7 @@ public class Counter
     {
         // ADD CODE TO INCREASE THE VALUE OF THE COUNTER
     }
-    
+
     /**
      * Get the value of the counter
      *
@@ -75,10 +76,10 @@ public class Counter
     {
         // CHANGE THE RETURN TO GIVE THE CURRENT VALUE OF THE COUNTER
         return -50;
-		
+
     }
-    
-    
+
+
     /**
      * Accessor that allows the client to determine if the counter
      *             rolled over on the last count
@@ -90,7 +91,7 @@ public class Counter
         // CHANGE THE RETURN TO THE ROLLOVER STATUS OF THE COUNTER
         return true;
     }
-    
+
     /**
      * Override the toString method to provide a more informative
      * description of the counter
@@ -100,7 +101,7 @@ public class Counter
     public String toString()
     {
         // CHANGE THE RETURN TO A DESCRIPTION OF THE COUNTER
-        return "";		
+        return "";
     }
- 
+
 }
