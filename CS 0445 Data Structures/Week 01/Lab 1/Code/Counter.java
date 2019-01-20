@@ -6,7 +6,7 @@
  * @author Charles Hoot
  * @version 4.0
  */
- //Add Comment to test Github
+
 public class Counter
 {
     // PUT PRIVATE DATA FIELDS HERE
