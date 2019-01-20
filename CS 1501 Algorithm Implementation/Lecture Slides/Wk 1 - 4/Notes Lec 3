@@ -1,0 +1,17 @@
+Binary Search Tree:
+	Searching Run time: theta(tree depth).  Avg: theta(log 2 n), Worst case: theta(n)
+
+Digital Search Tree:
+	Searching Run time: theta(tree depth).  Avg: theta(log n), Worst case: theta(n), O(b)
+
+	Big O: less than equal to
+	Theta: equal to
+-------------------------------------------------
+Tries: We dont compare keys
+
+Radix Search Tries:
+	Worst:  theta(b)
+	Avg: 	theta(b)
+
+	base 256 Radix Search Trie (Trie Example 2, she,sells, sea, shells, by, the, beach)
+		Runtime: O(w) w: max # of letters in a key

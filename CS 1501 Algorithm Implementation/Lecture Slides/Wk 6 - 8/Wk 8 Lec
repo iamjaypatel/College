@@ -1,0 +1,20 @@
+Lec after MT
+
+	T(n) = aT(n/b) + f(n)	a >= 1; b > 1
+
+Master Theorm:
+	Case 1: the leaves has most amount of work
+		f(n) = O(n^(log b a-E)) (E is epsilon)
+		# of nodes = ( # of children Node)^#leaves = a^(log b n) = n^(log b a)
+		T(n) = theta(# leaves) = theta( n^ (log b a))
+	Case 2: Work done on each level is  same
+		f(n) = theta(n ^ (log b a))
+		T(n) = theta(n^(log b a) log n)
+	Case 3: Root has the large amount of work
+		f(n) = big-omega(n^(log b a+E) && cf(n) >= af(n/b)) (E  is epsilon)
+		T(n) = theta(f(n))
+
+A good cipher mixes substitution and randomization
+
+Perfect Cipher
+	One time pads: 

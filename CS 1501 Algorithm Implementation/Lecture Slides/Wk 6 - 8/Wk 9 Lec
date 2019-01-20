@@ -1,0 +1,14 @@
+Wk 9 Lec
+
+RSA:
+
+
+Graphs:
+
+Undirected Graph: A graph that has no direction, edges has no direction
+Directed Graphs: Edges are an ordered pair
+
+small e = number of edges
+small v = number of vertices
+
+12, adjacency list: space theta(v+e)

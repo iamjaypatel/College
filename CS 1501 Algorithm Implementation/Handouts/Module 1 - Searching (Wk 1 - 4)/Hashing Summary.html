@@ -1,0 +1,803 @@
+
+<!-- saved from url=(0060)http://people.cs.pitt.edu/~ramirez/cs1501/handouts/hash.html -->
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml" xmlns="http://www.w3.org/TR/REC-html40"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Title" content="CS 1501">
+<meta name="Keywords" content="">
+
+<meta name="ProgId" content="Word.Document">
+<meta name="Generator" content="Microsoft Word 2008">
+<meta name="Originator" content="Microsoft Word 2008">
+<link rel="File-List" href="http://people.cs.pitt.edu/~ramirez/cs1501/handouts/hash_files/filelist.xml">
+<title>CS 1501</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Template>Normal.dotm</o:Template>
+  <o:LastAuthor>John Ramirez</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>7</o:TotalTime>
+  <o:Created>2011-05-23T14:45:00Z</o:Created>
+  <o:LastSaved>2011-05-23T14:52:00Z</o:LastSaved>
+  <o:Pages>2</o:Pages>
+  <o:Words>2307</o:Words>
+  <o:Characters>13154</o:Characters>
+  <o:Company>University of Pittsburgh</o:Company>
+  <o:Lines>109</o:Lines>
+  <o:Paragraphs>26</o:Paragraphs>
+  <o:CharactersWithSpaces>16154</o:CharactersWithSpaces>
+  <o:Version>12.0</o:Version>
+ </o:DocumentProperties>
+ <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+  <o:TargetScreenSize>1800x1440</o:TargetScreenSize>
+ </o:OfficeDocumentSettings>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Zoom>125</w:Zoom>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:TrackMoves>false</w:TrackMoves>
+  <w:TrackFormatting/>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:Compatibility>
+   <w:SplitPgBreakAndParaMark/>
+   <w:DontVertAlignCellWithSp/>
+   <w:DontBreakConstrainedForcedTables/>
+   <w:DontVertAlignInTxbx/>
+   <w:Word11KerningPairs/>
+   <w:CachedColBalance/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="276">
+ </w:LatentStyles>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"Courier New";
+	panose-1:2 7 3 9 2 2 5 2 4 4;
+	mso-font-charset:0;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:Times;
+	panose-1:2 0 5 0 0 0 0 0 0 0;
+	mso-font-charset:0;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 2 1 2 1 8 4 8 7 8;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 0 65536 0 -2147483648 0;}
+@font-face
+	{font-family:Cambria;
+	panose-1:2 4 5 3 5 4 6 3 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:3 0 0 0 1 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:Times;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:Times;
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-theme-font:minor-bidi;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:Times;
+	mso-fareast-font-family:"Times New Roman";
+	mso-fareast-theme-font:minor-fareast;
+	mso-hansi-font-family:Times;
+	mso-bidi-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:682316225;
+	mso-list-template-ids:1278525816;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l0:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";}
+@list l1
+	{mso-list-id:1216160547;
+	mso-list-template-ids:2047015774;}
+@list l2
+	{mso-list-id:1528713069;
+	mso-list-template-ids:-934888136;}
+@list l3
+	{mso-list-id:1585990150;
+	mso-list-template-ids:178401290;}
+@list l4
+	{mso-list-id:1653173716;
+	mso-list-template-ids:2022059950;}
+@list l4:level1
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level2
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l4:level3
+	{mso-level-number-format:alpha-lower;
+	mso-level-tab-stop:1.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;}
+@list l5
+	{mso-list-id:2143227755;
+	mso-list-template-ids:2142396130;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-ascii-font-family:Cambria;
+	mso-ascii-theme-font:minor-latin;
+	mso-hansi-font-family:Cambria;
+	mso-hansi-theme-font:minor-latin;}
+</style>
+<![endif]-->
+<meta name="Template" content="C:\Program Files\Microsoft Office\Office\html.dot">
+<meta name="Template" content="C:\Program Files\Microsoft Office\Office\html.dot">
+</head>
+
+<body bgcolor="white" lang="EN-US" link="blue" vlink="purple" style="tab-interval:.5in">
+
+<div class="Section1">
+
+<p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+text-align:center"><b style="mso-bidi-font-weight:normal"><span style="font-size:13.5pt">CS 1501<o:p></o:p></span></b></p>
+
+<p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+text-align:center"><b style="mso-bidi-font-weight:normal"><span style="font-size:13.5pt">Hashing Summary<o:p></o:p></span></b></p>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Basic Idea:</b> </p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Use a <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">hash function</span></i></b>
+to map keys into the index range of a <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">hash table</span></i></b>.
+Call the hash function <span class="GramE">h(</span>x), let the index range be
+0..(M-1), where M is the size of the hash table, and let the table be an array,
+T, of some item type. Note: A more proper object-oriented implementation would
+have the table be an object with the various operations as member functions.
+However, we will keep it simple in this discussion.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Simplistically, now an <span class="GramE">Insert(</span>T,
+item) function will be as follows:</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="SpellE"><span class="GramE"><span style="font-family:&quot;Courier New&quot;">i</span></span></span><span style="font-family:&quot;Courier New&quot;"> = h(item);<o:p></o:p></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="font-family:&quot;Courier New&quot;"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE">T[</span><span class="SpellE">i</span>] = item;<o:p></o:p></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">And a <span class="GramE">Find(</span>T, item)
+function will be as follows:</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="SpellE"><span class="GramE"><span style="font-family:&quot;Courier New&quot;">i</span></span></span><span style="font-family:&quot;Courier New&quot;"> = h(item);<o:p></o:p></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="font-family:&quot;Courier New&quot;"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE">if</span> (T[<span class="SpellE">i</span>] == item) found<o:p></o:p></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="font-family:&quot;Courier New&quot;"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE">else</span> <span class="SpellE">not_found</span><o:p></o:p></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Based on these simplistic functions, it is clear
+that the hash table operations will have <span class="GramE">O(</span>1)
+run-times, assuming h(x) can be calculated in constant time. We will see that
+the <span class="SpellE">the</span> actual run-times are still <span class="GramE">O(</span>1)
+in the average case, but can degrade to O(N) in the worst case.</p>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Complicating Factors:<o:p></o:p></b></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">The <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">key space</span></i></b>
+(possible values of all potential keys), <b style="mso-bidi-font-weight:normal">K</b>,
+is usually larger in size (often much larger) than the table size, M. Note that
+this does not mean that the actual number of keys, N, is larger than M (which
+cannot be true for the Open Addressing schemes described below). For example,
+if an employer wants to use Social Security Numbers as keys, even if he/she has
+only 100 employees (N = 100), the key space is still the number of possible
+Social Security Numbers (K = 2<sup>9</sup>), since the employer may not know in
+advance the SSN of each employee he has (or may have in the future).</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">If (K &gt; M), by the Pigeonhole Principle, we know
+that we cannot have a mapping of each potential key into a unique index in the
+array. Thus we have to possibility of a <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">collision</span></i></b>.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Define a collision to be the situation in which</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE"><span style="font-family:&quot;Courier New&quot;">h</span></span><span style="font-family:&quot;Courier New&quot;">(x<sub>1</sub>) == h(x<sub>2</sub>), where x<sub>1</sub>
+!= x<sub>2<o:p></o:p></sub></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">With the possibility of collisions, our simplistic
+hash table functions above fail. We must modify them to handle, or to <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">resolve</span></i></b> collisions.</p>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Reducing Collisions:<o:p></o:p></b></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Although most often we cannot eliminate collisions,
+we can try to reduce the probability of their occurrence. The best way to do
+this is to choose the hash table size, M, to be a prime number and to choose <span class="GramE">h(</span>x) in an intelligent way.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">If keys are hashed to "randomly" selected
+locations in the table, collisions will only occur due to random chance, based
+on the number of possible keys and the degree to which the table is already
+filled. If, however, patterns develop in the hashing of keys, the potential for
+many collisions occurs and the performance of the hash table will degrade
+quickly. An example of a poor hash function is, for example, using the first
+three digits of a telephone number for Pitt Students. Since many students have
+the same leading phone number digits (683, 624, 648, etc) and since some
+exchanges are not allowed (ex. 911, 411), there will be many collisions at some
+table locations and others will have a 0 probability of being hashed to. Using
+the last three digits is just as simple, yet much more effective, since the
+last three digits of a phone number tend to be more "random" than the
+first three. </p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">A simple, effective hash function for random
+integers is</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE">h</span>(x) = x mod M</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">For more complicated keys (such as strings, for
+example), we can think of the hash function in two steps:</p>
+
+<ol style="margin-top:0in" start="1" type="1">
+ <ol style="margin-top:0in" start="1" type="1">
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l2 level2 lfo1;tab-stops:list 1.0in">Using all of the key (or as
+      much as is practical), convert the key into a large integer</li>
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l2 level2 lfo1;tab-stops:list 1.0in">Use the simple hash
+      function for random integers to find the index in the table</li>
+ </ol>
+</ol>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">It is important that the value as well as the
+position of each character in the string be taken into account (otherwise
+permutations of strings would hash to the same locations). <span class="GramE">This
+can be done by multiplying the ASCII value of each character by a different
+power of some constant</span> (the number of total characters is a good
+choice). To avoid overflow due to high powers of relatively large integers (for
+example, with the simple ASCII set, 128 would be the base, and 128<sup>5</sup>
+is already past the range of a 32 bit integer) we can use <b style="mso-bidi-font-weight:
+normal"><i style="mso-bidi-font-style:normal"><span style="color:red">Horner's
+Method</span></i></b>, as described on p. 460 of the <span class="SpellE">Sedgewick</span>
+text.</p>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Resolving Collisions<o:p></o:p></b></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">There are two different general approaches to
+maintaining hash tables:</p>
+
+<ol style="margin-top:0in" start="1" type="1">
+ <ol style="margin-top:0in" start="1" type="1">
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l3 level2 lfo2;tab-stops:list 1.0in">Place keys directly into
+      table locations. If an Insert collision occurs at a location, clearly the
+      new item must be placed into a different location (or a different
+      address). This approach is called <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">open addressing</span></i></b>,
+      since the address actually used may be different from the one selected by
+      <span class="GramE">h(</span>x).</li>
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l3 level2 lfo2;tab-stops:list 1.0in">Make the hash table an
+      array of some other collection ADT. Thus, the value selected by <span class="GramE">h(</span>x) simply indicates which collection to use for the
+      Insert (or Find, or Delete) function. Though the name is not commonly
+      used, we could call this technique <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">closed
+      addressing</span></i></b>, since the index selected by <span class="GramE">h(</span>x)
+      is always the one that is used.</li>
+ </ol>
+</ol>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Open Addressing Schemes<o:p></o:p></b></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">The simplest open addressing scheme is <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">linear probing</span></i></b>. Using linear probing, when a
+collision occurs at location <span class="GramE">h(</span>x), simply increment
+the index (mod M) until the collision is resolved. The actual resolution
+differs depending on the operation:</p>
+
+<ul style="margin-top:0in" type="disc">
+ <ul style="margin-top:0in" type="circle">
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l0 level2 lfo3;tab-stops:list 1.0in">For Insert, increment until
+      an empty location is discovered, then store the item in that location. We
+      must somehow initially mark the locations in the table as being empty,
+      through either a <span class="SpellE">bool</span> data field or an initial
+      sentinel value (ex. use -1 if the table will store non-negative
+      integers). </li>
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l0 level2 lfo3;tab-stops:list 1.0in">For Find, increment until:</li>
+ </ul>
+</ul>
+
+<ol style="margin-top:0in" start="1" type="a">
+ <ol style="margin-top:0in" start="1" type="a">
+  <ol style="margin-top:0in" start="1" type="a">
+   <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+       mso-list:l4 level3 lfo4;tab-stops:list 1.5in"><span class="GramE">the</span>
+       key is located, indicating found</li>
+   <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+       mso-list:l4 level3 lfo4;tab-stops:list 1.5in"><span class="GramE">an</span>
+       empty location is discovered, indicating <span class="SpellE">not_found</span></li>
+  </ol>
+ </ol>
+</ol>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Note that for both operations, if the table is full
+(N == M) there is the possibility that the search may cycle back to the
+original location, <span class="GramE">h(</span>x). The operations should account
+for this possibility, but, in reality, we should not let the table get even
+close to being full.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Define the <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">load factor</span></i></b>,
+<span class="GramE"><span style="font-family:Symbol">a</span> ,</span> to be the
+ratio of the number of items in the table to the table size, or</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE"><span style="font-family:Symbol">a</span></span> = N/M</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">As <span style="font-family:Symbol">a</span> <span style="font-family:Symbol">�</span> 1, linear probing degenerates very quickly
+toward <span class="GramE">O(</span>N) for the hash table operations, due in part
+to the phenomenon of <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">clustering</span></i></b>.
+Ideally, for a random key, a good hash function and an empty table, the
+probability that it will be hashed into any location in the table should be the
+same, or</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE"><span style="font-family:&quot;Courier New&quot;">p</span></span><span style="font-family:&quot;Courier New&quot;">(h(x)=<span class="SpellE">i</span>) = 1/M for
+all <span class="SpellE">i</span>, 0 &lt;= <span class="SpellE">i</span> &lt; M<o:p></o:p></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">However, once a location is filled, using the
+linear probing resolution technique, an Insert hashed to the filled location
+will be placed in the location immediately following. Extending this idea, if a
+cluster of successive locations in the table becomes filled, an Insert hashed
+to any of those locations will be placed at the first open location after the
+cluster. Thus,</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span style="mso-tab-count:1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span class="GramE"><span style="font-family:&quot;Courier New&quot;">p</span></span><span style="font-family:&quot;Courier New&quot;">(<span class="SpellE">i<sub>C</sub></span>) =
+(C+1)/M<o:p></o:p></span></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in"><span class="GramE">where</span> p(<span class="SpellE">i<sub>C</sub></span>) is the probability that a new item will be
+placed into location <span class="SpellE">i</span> after a cluster of length C.
+Thus, as clusters get longer, the probability that they get even longer
+increases.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Define a <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">probe</span></i></b>
+to be an access of a table location. As clusters increase in length, the
+average number of probes needed for Insert and Find operations also increases.
+This is especially evident for unsuccessful Finds, since they will only
+terminate at an empty location (at the end of the cluster). Thus, as <span style="font-family:Symbol">a</span> increases, cluster length increases and
+thus the run-times for Insert and Find increase, approaching <span class="GramE">O(</span>N)
+for <span style="font-family:Symbol">a</span> close to 1.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">An alternative to linear probing is <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">double hashing</span></i></b>. The idea behind double hashing
+is to make the probing increment dependent upon the key (rather than just being
+1, as with linear probing). This way, when a location in the table becomes
+filled, an Insert collision on that location will NOT necessarily be placed in
+the next location, but rather some increment down the table. This reduces
+clusters, since an Insert collision in location <span class="SpellE">i</span>
+could result in the item being placed (ideally) in any empty location, rather
+than the first empty location after <span class="SpellE">i</span> (as with linear
+probing).</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">The double hashing increment can be calculated in various
+ways, but the idea is to make it independent of the first hash function, so
+that two keys that collide with <span class="GramE">h(</span>x) will still
+generate different double hashing increments, and they will not collide on
+successive probes. The text discusses some ways to generate effective double
+hash increments. An easy way to see the similarities and differences between
+linear probing and double hashing is to note that linear probing is really a
+degenerate case of double hashing, with <span class="GramE">h<sub>2</sub>(</span>x)
+= 1 for all x.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">For double hashing to work and be effective, we
+must guarantee that</p>
+
+<ol style="margin-top:0in" start="1" type="1">
+ <ol style="margin-top:0in" start="1" type="1">
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l1 level2 lfo5;tab-stops:list 1.0in">The increment will never be
+      0 (otherwise we would never check more than one location). This usually
+      is not difficult to do.</li>
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l1 level2 lfo5;tab-stops:list 1.0in">Every location in the table
+      will be probed once before any is probed twice. If this condition does
+      not hold, we could utilize only part of the table and the performance
+      would suffer. For example, if M = 16 and <span class="GramE">h<sub>2</sub>(</span>x)
+      = 4, only 4 distinct locations in the table would ever be probed (try it
+      to see). To ensure that all locations in the table will (potentially) be
+      tried, we must be sure that the <span class="GramE">h<sub>2</sub>(</span>x)
+      value is always relatively prime with the table size. Since a prime
+      number is relatively <span class="GramE">prime</span> with any other
+      number, making the table size itself prime is a simple way to ensure this
+      condition.</li>
+ </ol>
+</ol>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">For light load factors, there is little performance
+difference between linear probing and double hashing. However, as <span style="font-family:Symbol">a</span> gets bigger (ex. 0.6, 0.7, 0.8) a marked
+performance difference between the two methods becomes evident. This difference
+has been investigated analytically and empirically, and formulas for the
+average number of probes for each method are shown in the text. Note, however,
+that as <span style="font-family:Symbol">a</span> <span style="font-family:
+Symbol">�</span> 1, both techniques break down and performance approaches <span class="GramE">O(</span>N). Thus, when using open addressing in general, it is a
+good idea to keep your table from getting too full.</p>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Deletion with Open Addressing Schemes<o:p></o:p></b></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">A shortcoming of both open addressing schemes is
+the <span style="color:red">Delete operation</span>. Recall that the Find
+function terminates unsuccessfully when it encounters an empty location in the
+table. However, if that empty location was the result of a deletion, the data
+may actually be present, further down the table. For example, consider the
+tables below, and assume that empty locations are marked with the value -1.
+Assume further that Data X, Y and Z all hash to location <span class="SpellE">i</span>.</p>
+
+<div align="center">
+
+<table class="MsoNormalTable" border="1" cellspacing="1" cellpadding="0" width="290" style="width:290.0pt;mso-cellspacing:1.0pt;mso-padding-alt:7.0pt 7.0pt 7.0pt 7.0pt">
+ <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes">
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">Index</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">Data</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd">&nbsp;</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">Index</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">Data</p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:1">
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center"><span class="SpellE"><span class="GramE">i</span></span></p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">X</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd">&nbsp;</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center"><span class="SpellE"><span class="GramE">i</span></span></p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">X</p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:2">
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center"><span class="GramE">i</span>+1</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">Y</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd">&nbsp;</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center"><span class="GramE">i</span>+1</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">-1</p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:3;mso-yfti-lastrow:yes">
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center"><span class="GramE">i</span>+2</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">Z</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd">&nbsp;</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center"><span class="GramE">i</span>+2</p>
+  </td>
+  <td width="20%" style="width:20.0%;padding:7.0pt 7.0pt 7.0pt 7.0pt">
+  <p align="center" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+  text-align:center">Z</p>
+  </td>
+ </tr>
+</tbody></table>
+
+</div>
+
+<p align="center" style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;
+margin-left:1.0in;mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:
+.5gd;mso-para-margin-left:1.0in;text-align:center">A Find for key Z in the left
+table would proceed through location <span class="SpellE"><span class="GramE">i</span></span><span class="GramE"> and i+1</span> and succeed at location i+2. However, if key Y is
+deleted from the table, as shown in the right table (and the location remarked
+with -1), a Find for key Z would terminate unsuccessfully at location i+1.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">One way to fix this problem (as described on p. 471
+of the <span class="SpellE">Sedgewick</span> text) is to rehash all of the keys
+from the location immediately after the deleted key until the end of that
+cluster (i.e. until a null location is reached).<span style="mso-spacerun:
+yes">&nbsp; </span>This will guarantee that the deleted key will not put a gap
+into a cluster, but at the expense of <span class="GramE">a</span> extra work for
+the delete operation.<span style="mso-spacerun: yes">&nbsp; </span>Clearly<span class="GramE">,<span style="mso-spacerun: yes">&nbsp; </span>if</span> clusters
+are small the amount of work here is less and if clusters are large the amount
+of work is more.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Another way to "fix" this problem which
+does not (immediately) cause a lot of extra work during the delete operation is
+to have three states for each table location: <i style="mso-bidi-font-style:
+normal">empty, full</i> and <i style="mso-bidi-font-style:normal">deleted</i>.
+This way, a <i style="mso-bidi-font-style:normal">deleted</i> location will
+terminate an Insert (a new item may be placed there) but it will not terminate
+a Find (it would proceed to the next location). Besides complicating the
+implementation, this "fix" has the drawback that, after long use, a
+hash table will eventually have few if any <i style="mso-bidi-font-style:normal">empty</i>
+locations left. Since unsuccessful Finds only stop at empty locations, the time
+for unsuccessful Finds will again approach the worst case of <span class="GramE">O(</span>N).
+To "fix" the "fix" we can periodically "rehash"
+everything in the table, reinitializing the locations to <i style="mso-bidi-font-style:
+normal">empty</i> and <i style="mso-bidi-font-style:normal">full</i>. However,
+this also has a lot of overhead, and, practically speaking, we may not want to
+use open addressing schemes if Delete will be needed. </p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Fortunately, there are applications for which
+Delete is not needed. For example, a compiler may keep track of declared
+identifiers with a hash table. Variable declarations cause an Insert and
+variable uses cause a Find. If the Find is unsuccessful, the compiler gives you
+the friendly "Undefined symbol" error, meaning you tried to use a
+variable that you did not declare. This can be done without requiring delete
+(local tables can be used for sub-blocks and the entire table destroyed when
+the block terminates).</p>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Closed Addressing - Separate Chaining<o:p></o:p></b></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">Recall that with closed addressing the hash
+function will merely select an individual collection ADT from an array of
+collection <span class="SpellE">ADTs</span>. With this approach some of the
+problems inherent to open addressing go away:</p>
+
+<ol style="margin-top:0in" start="1" type="1">
+ <ol style="margin-top:0in" start="1" type="1">
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l5 level2 lfo6;tab-stops:list 1.0in">Large <span class="GramE"><span style="font-family:Symbol">a</span> values</span> do not seriously
+      degrade the hash table performance. Since each index represents a
+      collection of items, a higher load factor simply means that the
+      individual collections will have more items in them on average. Thus,
+      performance will gracefully degrade as <span class="GramE"><span style="font-family:Symbol">a</span></span> increases, even if it is
+      larger than 1.</li>
+  <li class="MsoNormal" style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd;
+      mso-list:l5 level2 lfo6;tab-stops:list 1.0in">Delete is not a problem at
+      all. In this case we are simply doing all of our operations (Insert, Find
+      and Delete) on a collection ADT <span class="GramE">which</span> can handle
+      them in an appropriate way. The hash table simply selects the collection
+      to use.</li>
+ </ol>
+</ol>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">However, having an array of collection <span class="SpellE">ADTs</span> adds considerable overhead in itself, especially with
+regard to memory use. Thus, it would be prudent to make the collections simple,
+easy to implement, and low in memory use (for example, an array implemented ADT
+would not be a good idea, since we would have an array of arrays, which could
+require quite a lot of memory). <b style="mso-bidi-font-weight:normal"><i style="mso-bidi-font-style:normal"><span style="color:red">Separate chaining</span></i></b>,
+in which each ADT is an unsorted linked list, is a good choice.</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">In separate chaining the hash function simply
+chooses the linked list, and then a linked list Find, Insert or Delete is
+performed. Since the list is dynamic, we will only allocate memory for the
+items that are inserted into the list, and will not waste a lot of memory (just
+an extra pointer for each item). From previous experience, we know that
+unsorted linked lists do not give good performance for Find, Insert or Delete (<span class="GramE">O(</span>N) in the average and worst cases). However, the goal in
+this case is to keep the lists very short by hashing keys throughout the table.
+Thus, the added memory of using a sorted array (so binary search can be used
+for Find) or the added complexity (and overhead) of using a binary search tree
+at each index is unjustified. For example, how much time would be saved doing a
+binary search of an array of size 3 over doing a sequential search of a linked
+list with 3 nodes?</p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">When separate chaining is used, we still do not
+want the load factor to be too high, but as long as it is a small constant the
+hash operations should perform quite well, <span class="GramE">O(</span>1) in the
+average case. Note that the worst case is still <span class="GramE">O(</span>N),
+even with separate chaining. This is because there is still the chance that all
+(or most) keys could be hashed to the same location, degenerating our hash
+table into an unsorted linked list! However, with a good hash function the
+chances of the worst case actually occurring are very low.</p>
+
+<p style="margin-bottom:6.0pt;mso-para-margin-bottom:.5gd"><b style="mso-bidi-font-weight:
+normal">Conclusions<o:p></o:p></b></p>
+
+<p style="margin-top:0in;margin-right:0in;margin-bottom:6.0pt;margin-left:1.0in;
+mso-para-margin-top:0in;mso-para-margin-right:0in;mso-para-margin-bottom:.5gd;
+mso-para-margin-left:1.0in">If implemented properly, a hash table can give us <span class="GramE">O(</span>1) Find performance in the average case, which is much
+faster than any of the other searching algorithms we have considered. However,
+despite this speed advantage for Find, it is not always the method of choice.
+For example, we often want to be able to access our data in sorted order
+(alphabetically, numerically, etc.). A sorted array or a binary search tree
+provide this ability with little cost -- we could list the data in order in <span class="GramE">O(</span>N) time for either. However, remember that what makes a
+hash table effective is the fact that there is NO ORDER to the data in the
+table. Thus, we would have to do a full-fledged sort of the data, requiring <span class="GramE">O(</span><span class="SpellE">NlogN</span>) time (after first copying
+all of the data from the table to a second array). Yet if our dominant
+operation is <span class="GramE">Find</span>, it is hard to do better than
+hashing.</p>
+
+</div>
+
+
+
+
+</body></html>

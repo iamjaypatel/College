@@ -1,0 +1,44 @@
+5 - Graph Notes:
+
+Slide 42
+
+	Runtime for use in Huffman tree generation?
+		theta(n^2)
+Slide 43
+	Runtime for use in Huffman tree generation?
+		theta(n^2)
+Slide 48
+	Insert and Remove: theta(Log base 2 N) in worst case
+	Find: Constant time
+Slide 55
+	Runtime of Heap Sort: (N log n)
+Slide 68
+	theta(e log e), theta (v log v)
+Slide 71:
+	How do we implement cycle detection?
+		BFS: as it runs, maintain a parent array, when we process the node,
+			if we find a neighbor we visited, and is not a parent of the node, 
+			we have a cycle
+		Runtime: theta(v+e)
+Slide 72:
+	For a given graph G.....?
+Slide 75:
+	Vertices are connected can be found in constant time.
+	Union: theta(v)
+		Worst Case: At most it will take theta(log n), for both find and union.
+		theta(log n), is also max height of the tree
+Slide 79:
+	Runtime of Kruskal: theta(e * v)
+Slide 86:
+	find(): theta(log n)
+	union(): theta(log n)
+	Yes, we can do better, using path comparision
+Slide 87:
+	theta(e log e)
+---------- Network Flow --------------- from slide 88
+Slide 108
+	Value of Max Flow is equal to Min Cut
+Slice 111
+	Is it Possible?
+		Yes, assign weight of 1 to all edges.
+

@@ -1,0 +1,20 @@
+Lec 2, Sept 6, 2018
+
+Solving the Password - Brute force example
+	
+	StringBuilder sb = new StringBuilder("");
+
+	//Using recursion
+	void solve(int digitNo){
+		if(digitNo > 4) {
+			System.out.println(sb);
+			return;
+		}
+		for(int i = 0; i < 10; i++){
+			if(valid(sb.append("" + i))){ //pruning(lets say we are given that 0, only occurs once, we would use pruning)
+				sb.append("" + i);
+				solve(digitNo + 1);
+				sb.deleteCharAt(sb.length() - 1);
+			}
+		}
+	}
