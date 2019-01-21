@@ -1,5 +1,5 @@
-# Welcome to my GitHub Page, here you can find all of my College Programming Assignments.
-  - From all of Computer Science courses that I took while attending University of Pittsburgh (School of Computing and Information).
+# Welcome to my Website.
+  - Here you can find all of my programming work from college.
   - If you are a student please DO NOT use any code from here, it will violate the Universities Policy.
 # Relevant Courses
   - CIT 130-Intermediate Programming with JAVA.
