@@ -12,7 +12,6 @@ Here are the key topics to study in preparation for the test.
     - We can partition the testinf parameters into "eqvuivalence classes"
     - Equivalence class: a natural grouping of values with similar behavior or belonging to the same category.
 * Boundary and interior values
-    -
 * Base, Edge, and Corner cases
     - Base: An element in an equivalence class that is not around a boundry or an expected use case.
     - Edge: An element in an equivalence class that is next to a boundry OR an unexpected use case.
@@ -21,7 +20,7 @@ Here are the key topics to study in preparation for the test.
   * Know the differences and examples of each
     - Static: Cosde is not executed
     - Dynamic testing: code is executed(atlease some of it)
-    
+
 * Black/White/Grey box testing
   * Know the differences and examples of each
     - Black-box testing: testing with no knowledge of the interior structure or code of the application. Tests are often performed form the user's prespective, looking at the system as a whole.
