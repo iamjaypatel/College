@@ -18,9 +18,14 @@ Here are the key topics to study in preparation for the test.
     - Corner: A case which can only occur outside of normal operating parameters. or a combination of multiple edge cases.
 * Static vs Dynamic testing
   * Know the differences and examples of each
-    - Static: Cosde is not executed
-    - Dynamic testing: code is executed(atlease some of it)
-
+    - Static: Code is not executed
+      - The code is reviewed by a person or external program, without being executed
+        - Examples:
+          - Code walkthroughs and reviews
+          - Requirement analysis
+          - Source code analysis
+    - Dynamic testing: code is executed(at least some of it).
+        - The tests that user does.
 * Black/White/Grey box testing
   * Know the differences and examples of each
     - Black-box testing: testing with no knowledge of the interior structure or code of the application. Tests are often performed form the user's prespective, looking at the system as a whole.
@@ -29,8 +34,15 @@ Here are the key topics to study in preparation for the test.
 
 ## REQUIREMENTS ANALYSIS
 * What makes a good or bad requirement?
+  - Requirements: the specifications of the software. They say WHAT to do, not HOW to do it.
+  - Good:
 * Testability - requirements must be:
   * Complete, consistent, unambiguous, quantitative, feasible
+    - Complete: Requiremens should cover all aspects of a system. Anything not covered in requirements is liable to be interpreted differently.
+    - Consistent: 
+    - Unambiguous:
+    - Quantative:
+    - Feasible:
 * Functional vs Non-Functional Requirements  (Quality Attributes)
   * Be able to define and write your own
 * Traceability Matrices
