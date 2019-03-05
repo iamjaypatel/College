@@ -38,8 +38,8 @@ Here are the key topics to study in preparation for the test.
   - Good:
 * Testability - requirements must be:
   * Complete, consistent, unambiguous, quantitative, feasible
-    - Complete: Requiremens should cover all aspects of a system. Anything not covered in requirements is liable to be interpreted differently.
-    - Consistent: 
+    - Complete: Requiremens should cover all aspects of a system. Anything not covered in requirements is liable to be interpreted differenty.
+    - Consistent:
     - Unambiguous:
     - Quantative:
     - Feasible:
