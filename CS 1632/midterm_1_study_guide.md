@@ -89,6 +89,14 @@ Here are the key topics to study in preparation for the test.
 
 ## AUTOMATED TESTING
 * Pros and cons of automated testing
+  - Pros:
+    - No chance for human error
+    - Fast test execution
+    - Repeatable
+  - Cons
+    - Requires extra time up-front
+    - May not catch user-facing bugs.
+    - It only tests what it is looking for.
 * Unit tests vs system tests
 
 ## UNIT TESTING
@@ -103,6 +111,9 @@ Here are the key topics to study in preparation for the test.
 
 ## STATIC ANALYSIS
 * Understand static vs dynamic testing
+  - Static: code is not executed by the test.
+    - Code coverage, code review, etc.
+  - Dynamic: Code is executed by the test.
 * Understand limitations of static testing
 * Know different kinds of static analysis, and tools and methods used (e.g. linters, bug finders, code coverage, code metrics, code reviews)
 * You do NOT need to know specific Rubocop/Reek errors, but should understand what Rubocop and Reek do and what they might catch or not
@@ -111,10 +122,27 @@ Here are the key topics to study in preparation for the test.
 
 ## TDD
 * Basic concepts of test-first development
+  - Writing tests BEFORE writing code.
+  - Writing ONLY code that is tested.
+  - Writing ONLY tests that test the code.
+  - A very short turnaround cycle.
+  - Refactoring early and often.
 * The red-green-refactor loop
+  - Red: Write a test for a new functionality.
+    - This should immediately fail!
+  - Green: Write only enough code to make the test pass.
+  - Refractor: Review code and make it better.
 * Benefits and drawbacks of TDD
-  * When to use it?
-  * When not to use it?
+  - Benefits:
+    - Automatically creates Tests.
+    - Makes writing tests easy because it's done often.
+    - Tests are relevant.
+    - Developer is focused on end result, not code.
+  - Drawbacks:
+    - Extra up-front time.
+    - May not appropriate for prototyping.
+    - Could fall into trap of over testing.
+    - Tests become part of the overhead of the project.
 
 ## WRITING TESTABLE CODE
 * What do we mean by "testable code"?
