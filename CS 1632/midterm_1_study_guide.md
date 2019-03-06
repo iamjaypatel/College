@@ -38,19 +38,36 @@ Here are the key topics to study in preparation for the test.
   - Good:
 * Testability - requirements must be:
   * Complete, consistent, unambiguous, quantitative, feasible
-    - Complete: Requiremens should cover all aspects of a system. Anything not covered in requirements is liable to be interpreted differenty.
-    - Consistent:
+    - Complete: Requirements should cover all aspects of a system. Anything not covered in requirements is liable to be interpreted differently.
+    - Consistent: Requirements must be internally and externally consistent. They must not contradict each other.
     - Unambiguous:
-    - Quantative:
+      - BAD: When the database system stores a String and an invalid Date, it should be set to the default value.
+      - GOOD: When the database system stores a String and an invalid Date, the Date should be set to the default value.
+    - Quantitative:
+      - BAD: The system shall be responsive to the user
+      - GOOD: When running locally, user shall receive results in less than 1 second for 99% of expected queries.
     - Feasible:
+      - BAD: The system shall complete processing of a 100 TB data set within 4,137 years.
+      - GOOD: The system shall complete processing of a 1 MB data set within 4 hours.
 * Functional vs Non-Functional Requirements  (Quality Attributes)
   * Be able to define and write your own
+    - Functional Req: Specify the functional behavior of the system.
+      - The system shall do X [under conditions Y].
+      - Ex: The system shall return the string 'NONE' if no elements match the query.
+    - Quality Attributes: Specify the overall qualities of the system, not a specific behavior.
+      - The system shall be X [under conditions Y].
+      - Ex: The system shall be protected against unauthorized access.
 * Traceability Matrices
   * Be able to define and write your own
+    - Lists all requirements and which test cases are associated with that test case.
 
 ## TEST PLANS
 * Given a list of requirements, be able to write a test plan
 * Terminology: test cases, test plans, test suites, test runs
+  - Test Case: is the fundamental "unit" of a test plan.
+  - Test Plan: is a sequence of test cases.
+  - Test Suite: a group of test plan.
+  - Test Run: An actual run-through of a test plan or test suite.
 * Verification vs validation
 
 ## DEFECT REPORTING
