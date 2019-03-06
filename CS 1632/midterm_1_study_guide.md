@@ -93,7 +93,7 @@ Here are the key topics to study in preparation for the test.
     - No chance for human error
     - Fast test execution
     - Repeatable
-  - Cons
+  - Cons:
     - Requires extra time up-front
     - May not catch user-facing bugs.
     - It only tests what it is looking for.
