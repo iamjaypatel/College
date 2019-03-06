@@ -146,10 +146,20 @@ Here are the key topics to study in preparation for the test.
 
 ## WRITING TESTABLE CODE
 * What do we mean by "testable code"?
+  - Easy to write and perform tests, automated and manual, at various levels of abstraction, and track down errors when tests fail.
 * Basic strategies for testable code
+  - Segment code - make it modular.
+  - Give yourself something to test.
+  - Make it repeatable.
+  - DRY(Don't repeat yourself).
+  - Write code with seams.
 * Code segmentation
-* "Give yourself something to test"
+  - Methods should be SMALL and SPECIFIC- "Do one thing and do it well"
 * Pure vs impure methods - be prepared to define and/or determine if a method is pure or not
+  - Pure: Output only depends on input.
+  - impure: results depend on things other than arguments.
 * The DRY Principle - how could you DRY up some code?
+  - Make a generic method, and don't copy and paste code.
 * Understand seams - be able to re-write a method to have a seam.
 * Dependency injection - what is it?  Be able to re-write a method to use dependency injection.
+  - Passing in any objects that a method relies on.
