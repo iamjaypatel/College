@@ -80,7 +80,12 @@ Here are the key topics to study in preparation for the test.
 
 ## Smoke, Exploratory, and Path-based testing
 * Define all of these concepts
+  - Exploratory: Learning how the system works.
+  - Smoke: Do some minimal testing to ensure that the system is, in fact, testable or ready to be released.
+  - Path-based Testing: What are all the possible paths through a program/method/etc? Then test all of the paths. Similar to equivalence class partitioning.
 * I will not ask you to calculate cyclomatic complexity for a given method but I expect you to understand the concept and explain why a method with a higher or lower complexity might be easier/harder to test and why
+  - Lower cyclomatic complexity means lower risk, easier to understand.
+  - Higher complexity means more chances of defects.
 
 ## AUTOMATED TESTING
 * Pros and cons of automated testing
