@@ -1,6 +1,6 @@
 # Welcome to my Website.
-    - Here you can find all of my programming work from college.
-    - If you are a student please DO NOT use any code from here, it will violate the Universities Policy.
+   - Here you can find all of my programming work from college.
+   - If you are a student please DO NOT use any code from here, it will violate the Universities Policy.
     
     
     
@@ -18,4 +18,4 @@
     
     
 # Page is Under Construction
-    - For now you can click "View on GitHub". Check back Soon for updated site.
+   - For now you can click "View on GitHub". Check back Soon for updated site.
