@@ -6,6 +6,7 @@
     
  
  # Relevant Courses
+ 
    - CIT 130-Intermediate Programming with JAVA.
    - CS 0441-Discrete Structures for Computer Science.
    - CS 0445-Data Structures.
