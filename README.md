@@ -1,4 +1,4 @@
-# Welcome to my Website.
+# Welcome!
    - Here you can find all of my programming work from college.
    - If you are a student please DO NOT use any code from here, it will violate the Universities Policy.
     
