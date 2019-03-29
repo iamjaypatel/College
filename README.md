@@ -17,8 +17,3 @@
       - CS 1502-Formal Methods in Computer Science.
       - CS 1550-Introduction to Operating System.
       - CS 1632-Software Quality Assurance.
-    
-    
-    
-# Page is Under Construction
-   - For now you can click "View on GitHub". Check back Soon for updated site.
