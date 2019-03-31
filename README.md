@@ -5,7 +5,7 @@
     
     
  
-# Relevant Coursework
+# Relevant Coursework :point_down:
    - CCAC
       - CIT 130-Intermediate Programming with JAVA.
    - Pitt
