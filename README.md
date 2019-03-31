@@ -7,7 +7,7 @@
  
 # Relevant Coursework
    - CCAC
-      - [CIT 130-Intermediate Programming with JAVA.](https://github.com/iamjaypatel/Jay_Patel-CSCW/tree/master/CIT%20130)
+      - CIT 130-Intermediate Programming with JAVA.
    - Pitt
       - CS 0441-Discrete Structures for Computer Science.
       - CS 0445-Data Structures.
